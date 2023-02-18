@@ -79,9 +79,24 @@ function display() {
     td3.innerText = value.issued_to;
     let td4 = document.createElement("td");
     td4.innerText = value.issued_time;
-    let td5 = document.createElement("td");
-    td5.innerText = value.status;
 
+    let td5 = document.createElement("td");
+
+    const td5Input = document.createElement('span');
+    td5Input.textContent = value.status;
+        td5Input.style.color=(
+          value.status === "returned" ? "green" : "red"
+        );
+    td5Input.contentEditable = true;
+    
+  
+      td5Input.addEventListener("input", function () {
+        value.status = td5Input.textContent;
+        td5Input.style.color=(value.status === "not returned"? "red" : "green");
+      }); 
+    
+     
+    td5.append(td5Input);
     tr.append(td1,td2,td3,td4,td5);
     tableBody.append(tr);
 
